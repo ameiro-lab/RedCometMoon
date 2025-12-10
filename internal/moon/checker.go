@@ -43,8 +43,8 @@ func IsMoonVisibleForDay(lat, lon float64, date string) CheckResult {
 		return CheckResult{Visible: false, Error: fmt.Errorf("JSON デコードエラー: %w", err)}
 	}
 
-	// TEST：レスポンスをログで確認
-	// fmt.Printf("デバッグ: %+v\n", data)
+	// デバック用：レスポンスをログで確認
+	fmt.Printf("デバッグ: %+v\n", data)
 
 	// 判定ロジック：東北東 (67.5° ± 20°)
 	center := 67.5

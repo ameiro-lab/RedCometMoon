@@ -6,8 +6,25 @@ go version go1.25.2 darwin/amd64
 
 * Ginの導入
 ```
-go get github.com/gin-gonic/gin
+$ go get github.com/gin-gonic/gin
 ```
+
+* SDKを取得
+```
+$ go get github.com/line/line-bot-sdk-go/linebot
+```
+
+* ngrokの導入
+```
+$ brew install --cask ngrok
+```
+アカウント登録とトークンの設定が必要。https://dashboard.ngrok.com/ できたらコマンドを実行
+```
+$ ngrok http 8080
+Forwarding    https://stereotactically-windrode-jewel.ngrok-free.dev -> http://localhost:8080
+```
+https://以降のURL + `/callback` を LINE Developers の `Webhook URL` に設定する。
+
 
 * ディレクトリ構成
 ```
