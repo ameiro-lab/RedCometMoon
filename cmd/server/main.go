@@ -50,14 +50,14 @@ func main() {
 	})
 
 	// --- WebhookでLINEイベントを検知する
-	r.POST("/callback", func(c *gin.Context) {
-		// 処理関数を呼び出し
-		line.HandleEvents(c.Request, lineClient)
-		c.Status(200)
-	})
+	// r.POST("/callback", func(c *gin.Context) {
+	// 	// 処理関数を呼び出し
+	// 	line.HandleEvents(c.Request, lineClient)
+	// 	c.Status(200)
+	// })
 
 	// --- 月が見えるか判定を実行
-	r.GET("/check-moon", moon.CheckMoonHandler)
+	r.GET("/check-moon", moon.CheckMoonHandler(lineClient))
 
 	r.Run(":8080")
 }
