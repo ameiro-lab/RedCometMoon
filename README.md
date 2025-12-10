@@ -9,6 +9,11 @@ go version go1.25.2 darwin/amd64
 $ go get github.com/gin-gonic/gin
 ```
 
+* cronパッケージの利用
+```
+$ go get github.com/robfig/cron/v3
+```
+
 * SDKを取得
 ```
 $ go get github.com/line/line-bot-sdk-go/linebot
@@ -41,6 +46,9 @@ RedCometMoon/
 │   ├ line/
 │   │   ├ client.go              // LINE Bot の初期化
 │   │   └ notifier.go            // 通知まわり
+│   │
+│   ├ cron/
+│   │   └ scheduler.go           // 定期実行処理をまとめる
 │   │
 │   └ server/
 │       ├ router.go              // Gin のルーティング

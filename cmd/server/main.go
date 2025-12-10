@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/ameiro-lab/RedCometMoon/internal/cron"
 	"github.com/ameiro-lab/RedCometMoon/internal/line"
 	"github.com/ameiro-lab/RedCometMoon/internal/moon"
 	"github.com/gin-gonic/gin"
@@ -42,13 +43,6 @@ func main() {
 		log.Fatalf("LINE 初期化エラー: %v", err)
 	}
 
-	// ---ginサーバー起動
-	r := gin.Default()
-	// サーバーが起動しているか確認
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "pong"})
-	})
-
 	// --- WebhookでLINEイベントを検知する
 	// r.POST("/callback", func(c *gin.Context) {
 	// 	// 処理関数を呼び出し
@@ -56,7 +50,17 @@ func main() {
 	// 	c.Status(200)
 	// })
 
-	// --- 月が見えるか判定を実行
+	// --- cron 定期実行開始
+	cron.StartScheduler(lineClient)
+
+	// --- ginサーバー起動
+	r := gin.Default()
+	// サーバーが起動しているか確認
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{"message": "pong"})
+	})
+
+	// 月判定を手動で確認したい場合
 	r.GET("/check-moon", moon.CheckMoonHandler(lineClient))
 
 	r.Run(":8080")
